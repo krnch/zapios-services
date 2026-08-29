@@ -1,0 +1,12 @@
+{
+  "name": "zapios-services",
+  "version": "1.0.0",
+  "description": "Zapios AI Services marketplace landing page",
+  "main": "serve.js",
+  "scripts": {
+    "start": "node serve.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

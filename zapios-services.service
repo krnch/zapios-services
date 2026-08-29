@@ -1,0 +1,15 @@
+[Unit]
+Description=Zapios AI Services — AI automation gig marketplace
+After=network.target
+
+[Service]
+Type=simple
+User=karprik
+WorkingDirectory=/home/karprik/projects/zapios-services
+ExecStart=/usr/bin/node serve.js
+Restart=on-failure
+RestartSec=5
+Environment=NODE_ENV=production
+
+[Install]
+WantedBy=multi-user.target
