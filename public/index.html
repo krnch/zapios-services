@@ -415,5 +415,37 @@
   <p style="margin-top:6px;color:#4a4a6a;">Built with Claude · Copilot API · CDP Chrome · Python</p>
 </footer>
 
+
+  <section id="order" style="max-width:640px;margin:60px auto;padding:0 20px;">
+    <h2 style="text-align:center;">Request a Service</h2>
+    <p style="text-align:center;color:var(--muted);">No account needed — tell us what you need and we reply within 24h.</p>
+    <form id="orderForm" style="display:flex;flex-direction:column;gap:12px;margin-top:20px;">
+      <input name="name" placeholder="Your name" style="padding:12px;border-radius:8px;border:1px solid var(--border);background:#111;color:#fff;">
+      <input name="email" type="email" required placeholder="Email *" style="padding:12px;border-radius:8px;border:1px solid var(--border);background:#111;color:#fff;">
+      <select name="gig" required style="padding:12px;border-radius:8px;border:1px solid var(--border);background:#111;color:#fff;">
+        <option value="">Select a service *</option>
+        <option>LinkedIn Auto-Outreach Bot</option>
+        <option>Competitor Analysis Report</option>
+        <option>Job Application Automator</option>
+        <option>YouTube Channel Analyzer</option>
+        <option>Lead Generation Scraper</option>
+      </select>
+      <textarea name="message" rows="4" placeholder="Tell us about your project" style="padding:12px;border-radius:8px;border:1px solid var(--border);background:#111;color:#fff;"></textarea>
+      <button type="submit" class="nav-cta" style="border:none;cursor:pointer;padding:12px;">Submit Request</button>
+      <div id="orderResult" style="text-align:center;color:var(--accent);"></div>
+    </form>
+  </section>
+  <script>
+    document.getElementById('orderForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const fd = new FormData(e.target);
+      const body = Object.fromEntries(fd.entries());
+      const r = await fetch('/api/order', {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+      const j = await r.json();
+      document.getElementById('orderResult').textContent = j.ok ? ('✅ '+j.message) : ('⚠️ '+j.error);
+      if (j.ok) e.target.reset();
+    });
+  </script>
+
 </body>
 </html>
